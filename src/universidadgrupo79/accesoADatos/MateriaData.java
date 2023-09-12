@@ -119,7 +119,7 @@ public class MateriaData {
             ps.close();
             
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a tabla Alumno");
+            JOptionPane.showMessageDialog(null, "Error al acceder a tabla Materia");
         }
         return materias;
     }
