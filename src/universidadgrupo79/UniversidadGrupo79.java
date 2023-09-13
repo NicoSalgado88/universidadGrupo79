@@ -52,9 +52,13 @@ public class UniversidadGrupo79 {
 //        for (Materia mat : data.obtenerMateriasCursadas(5)) {
 //            System.out.println(mat.toString());
 //        }
-        for (Materia mat : data.obtenerMateriasNOCursadas(5)) {
-            System.out.println(mat.toString());
-        }
+//        for (Materia mat : data.obtenerMateriasNOCursadas(5)) {
+//            System.out.println(mat.toString());
+//        }
+
+//        for (Alumnos alu : data.obtenerAlumnosPorMateria(2)) {
+//            System.out.println(alu.toString());
+//        }
     }
     
 }
