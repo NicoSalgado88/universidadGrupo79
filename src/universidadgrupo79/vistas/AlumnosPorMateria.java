@@ -5,6 +5,7 @@
 package universidadgrupo79.vistas;
 
 import javax.swing.table.DefaultTableModel;
+import universidadgrupo79.accesoADatos.MateriaData;
 import universidadgrupo79.entidades.Materia;
 
 /**
@@ -13,13 +14,18 @@ import universidadgrupo79.entidades.Materia;
  */
 public class AlumnosPorMateria extends javax.swing.JInternalFrame {
 
-    private DefaultTableModel modelo=new DefaultTableModel();
+    private DefaultTableModel modelo=new DefaultTableModel(){
+         public boolean isCellEditable(int f, int c){
+            return false;
+        }
+    };
     /**
      * Creates new form AlumnosPorMateria
      */
     public AlumnosPorMateria() {
         initComponents();
         armarCabecera();
+        cargarCombox();
     }
 
     /**
@@ -34,7 +40,7 @@ public class AlumnosPorMateria extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcMateria = new javax.swing.JComboBox<>();
         jbSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtListadoAluMat = new javax.swing.JTable();
@@ -52,8 +58,8 @@ public class AlumnosPorMateria extends javax.swing.JInternalFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Seleccione una materia:");
 
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setForeground(new java.awt.Color(0, 0, 0));
+        jcMateria.setBackground(new java.awt.Color(255, 255, 255));
+        jcMateria.setForeground(new java.awt.Color(0, 0, 0));
 
         jbSalir.setText("Salir");
 
@@ -88,7 +94,7 @@ public class AlumnosPorMateria extends javax.swing.JInternalFrame {
                                 .addGap(17, 17, 17)
                                 .addComponent(jLabel2)
                                 .addGap(42, 42, 42)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jcMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -101,7 +107,7 @@ public class AlumnosPorMateria extends javax.swing.JInternalFrame {
                 .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
@@ -127,12 +133,12 @@ public class AlumnosPorMateria extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<Materia> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<Materia> jcMateria;
     private javax.swing.JTable jtListadoAluMat;
     // End of variables declaration//GEN-END:variables
 
@@ -143,7 +149,15 @@ public class AlumnosPorMateria extends javax.swing.JInternalFrame {
         modelo.addColumn("Nombre");
         jtListadoAluMat.setModel(modelo);
     }
+      
+    private void cargarCombox(){
+        MateriaData mate=new MateriaData();
+        for (Materia mat : mate.listarMaterias()) {
+            jcMateria.addItem(mat);
+        }
             
+        
+    }
     
 }
 

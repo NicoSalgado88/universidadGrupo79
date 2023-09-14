@@ -4,6 +4,7 @@
  */
 package universidadgrupo79.vistas;
 
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import universidadgrupo79.accesoADatos.AlumnoData;
 import universidadgrupo79.entidades.Alumnos;
@@ -14,7 +15,11 @@ import universidadgrupo79.entidades.Alumnos;
  */
 public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
     
-    private DefaultTableModel modelo=new DefaultTableModel();
+    private DefaultTableModel modelo=new DefaultTableModel(){
+        public boolean isCellEditable(int f, int c){
+            return false;
+        }
+    };
     /**
      * Creates new form ManipulacionDeNotas
      */
@@ -156,7 +161,11 @@ public class ManipulacionDeNotas extends javax.swing.JInternalFrame {
     }
     
     private void cargarCombox(){
+        AlumnoData alu=new AlumnoData();
+        for (Alumnos alus : alu.listarAlumnos()) {
+            jcbAlumno.addItem(alus);
+        }
+            
         
-        jcbAlumno.addItem(new Alumnos());
     }
 }
