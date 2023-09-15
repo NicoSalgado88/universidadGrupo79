@@ -5,6 +5,7 @@
 package universidadgrupo79.vistas;
 
 import java.sql.Date;
+import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import universidadgrupo79.accesoADatos.AlumnoData;
 import universidadgrupo79.entidades.Alumnos;
@@ -42,7 +43,7 @@ public class FormularioDeAlumnos extends javax.swing.JInternalFrame {
         jtApellido = new javax.swing.JTextField();
         jtNombre = new javax.swing.JTextField();
         jrEstado = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        jbBuscar = new javax.swing.JButton();
         jbNuevo = new javax.swing.JButton();
         jbEliminar = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
@@ -93,12 +94,12 @@ public class FormularioDeAlumnos extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbBuscar.setBackground(new java.awt.Color(255, 255, 255));
+        jbBuscar.setForeground(new java.awt.Color(0, 0, 0));
+        jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbBuscarActionPerformed(evt);
             }
         });
 
@@ -124,6 +125,11 @@ public class FormularioDeAlumnos extends javax.swing.JInternalFrame {
         });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -166,7 +172,7 @@ public class FormularioDeAlumnos extends javax.swing.JInternalFrame {
                                             .addComponent(jtApellido)
                                             .addComponent(jtDni))
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButton1)
+                                        .addComponent(jbBuscar)
                                         .addContainerGap(57, Short.MAX_VALUE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jrEstado)
@@ -185,7 +191,7 @@ public class FormularioDeAlumnos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jbBuscar))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -232,9 +238,9 @@ public class FormularioDeAlumnos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jrEstadoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         // TODO add your handling code here:
-        
+
         AlumnoData ad = new AlumnoData();
         // Alumnos alu=new Alumnos(ad.buscarAlumnoPorDni(dni));
 
@@ -248,15 +254,14 @@ public class FormularioDeAlumnos extends javax.swing.JInternalFrame {
                 jrEstado.setEnabled(false);
                 jrEstado.setSelected(ad.buscarAlumnoPorDni(dni).isActivo());
                 jdcFechaN.setEnabled(false);
-                jdcFechaN.setDate(Date.valueOf(ad.buscarAlumnoPorDni(dni).getFechaNac()));              
+                jdcFechaN.setDate(Date.valueOf(ad.buscarAlumnoPorDni(dni).getFechaNac()));
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El campo 'DNI' solo admite números", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        catch(NullPointerException e){
+        } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "El alumno no existe");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
         // TODO add your handling code here:
@@ -265,46 +270,56 @@ public class FormularioDeAlumnos extends javax.swing.JInternalFrame {
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
-        AlumnoData alu=new AlumnoData();
-        try{
-        int dni = Integer.parseInt(jtDni.getText());
-        if(!jtDni.getText().isEmpty()){
-            alu.eliminarAlumno(alu.buscarAlumnoPorDni(dni).getIdAlumno());
-            limpiar();
-        }
-        
-        
-        }
-        catch(NumberFormatException e) {
+        AlumnoData alu = new AlumnoData();
+        try {
+            int dni = Integer.parseInt(jtDni.getText());
+            if (!jtDni.getText().isEmpty()) {
+                alu.eliminarAlumno(alu.buscarAlumnoPorDni(dni).getIdAlumno());
+                limpiar();
+            }
+
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El campo 'DNI' solo admite números", "Error", JOptionPane.ERROR_MESSAGE);
-            
+
         }
-        
+
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-        AlumnoData alud=new AlumnoData();
-        Alumnos alu=new Alumnos();
+        AlumnoData alud = new AlumnoData();
+        Alumnos alu = new Alumnos();
         try {
-            if(!jtDni.getText().isEmpty()){
+            alu.setActivo(jrEstado.isSelected());
+            if (!jtDni.getText().isEmpty()) {
                 alu.setDni(Integer.parseInt(jtDni.getText()));
             }
-            if(!jtApellido.getText().isEmpty()){
+            if (!jtApellido.getText().isEmpty()) {
                 alu.setApellido(jtApellido.getText());
             }
-            if(!jtNombre.getText().isEmpty()){
+            if (!jtNombre.getText().isEmpty()) {
                 alu.setNombre(jtNombre.getText());
             }
-            
-        } catch (Exception e) {
+            if (jdcFechaN.getDate() != null) {
+                alu.setFechaNac(jdcFechaN.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                alud.guardarAlumno(alu);
+                limpiar();
+            } else {
+                JOptionPane.showMessageDialog(this, "Uno o más campos se encuentran vacios", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El campo 'DNI' solo admite números", "Error", JOptionPane.ERROR_MESSAGE);
         }
-      
+
     }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jbSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -312,6 +327,7 @@ public class FormularioDeAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
@@ -323,8 +339,8 @@ public class FormularioDeAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 
-    private void limpiar(){
-         jtDni.setText("");
+    private void limpiar() {
+        jtDni.setText("");
         jtApellido.setText("");
         jtApellido.setEditable(true);
         jtNombre.setText("");
