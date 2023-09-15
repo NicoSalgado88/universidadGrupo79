@@ -86,6 +86,7 @@ public class FormularioDeAlumnos extends javax.swing.JInternalFrame {
 
         jrEstado.setBackground(new java.awt.Color(153, 255, 204));
         jrEstado.setForeground(new java.awt.Color(0, 0, 0));
+        jrEstado.setSelected(true);
         jrEstado.setBorder(null);
         jrEstado.setContentAreaFilled(false);
         jrEstado.addActionListener(new java.awt.event.ActionListener() {
