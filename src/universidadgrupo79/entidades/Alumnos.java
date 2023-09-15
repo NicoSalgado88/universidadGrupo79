@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package universidadgrupo79.entidades;
 
 import java.time.LocalDate;
@@ -87,7 +83,7 @@ public class Alumnos {
 
     @Override
     public String toString() {
-        return "Alumnos{" + "idAlumno=" + idAlumno + ", dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + ", fechaNac=" + fechaNac + ", activo=" + activo + '}';
+        return idAlumno+"-"+apellido+", "+nombre;
     }
 
     
