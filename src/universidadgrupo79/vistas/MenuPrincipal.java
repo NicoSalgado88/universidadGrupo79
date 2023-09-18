@@ -37,7 +37,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jmManipulacionDeNotas = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jmAlumnosPorMateria = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        jmSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,8 +118,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu5.setText("Salir");
-        jMenuBar1.add(jMenu5);
+        jmSalir.setText("Salir");
+        jmSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmSalirActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jmSalir);
 
         setJMenuBar(jMenuBar1);
 
@@ -205,6 +210,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.moveToFront(apm);
     }//GEN-LAST:event_jmAlumnosPorMateriaActionPerformed
 
+    private void jmSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmSalirActionPerformed
+        // TODO add your handling code here:
+        System.exit(1);
+    }//GEN-LAST:event_jmSalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -245,13 +255,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jmAlumnosPorMateria;
     private javax.swing.JMenuItem jmFormularioDeAlumno;
     private javax.swing.JMenuItem jmFormularioDeMateria;
     private javax.swing.JMenuItem jmManejoDeInscipciones;
     private javax.swing.JMenuItem jmManipulacionDeNotas;
+    private javax.swing.JMenu jmSalir;
     private javax.swing.JMenu menumat;
     // End of variables declaration//GEN-END:variables
 }
