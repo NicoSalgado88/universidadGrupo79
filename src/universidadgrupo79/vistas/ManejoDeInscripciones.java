@@ -287,7 +287,7 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
 
     private void jrInscriptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrInscriptoActionPerformed
         // TODO add your handling code here:
-              InscripcionData inD = new InscripcionData();
+        InscripcionData inD = new InscripcionData();
         Alumnos alu = (Alumnos) jbAlumnos.getSelectedItem();
         modelo.setRowCount(0);
         if(jrNoInscripto.isSelected()){
