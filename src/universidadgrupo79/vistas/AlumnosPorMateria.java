@@ -73,6 +73,7 @@ public class AlumnosPorMateria extends javax.swing.JInternalFrame {
         });
 
         jbSalir.setText("Salir");
+        jbSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);

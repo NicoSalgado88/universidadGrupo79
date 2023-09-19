@@ -145,6 +145,7 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jtFormulario);
 
         jbInscribir.setText("Inscribir");
+        jbInscribir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbInscribir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbInscribirActionPerformed(evt);
@@ -152,6 +153,7 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
         });
 
         jbAnular.setText("Anular inscripcion");
+        jbAnular.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbAnular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAnularActionPerformed(evt);
@@ -159,6 +161,7 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
         });
 
         jbSalir.setText("Salir");
+        jbSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbSalirActionPerformed(evt);
