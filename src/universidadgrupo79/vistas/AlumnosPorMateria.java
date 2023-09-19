@@ -5,7 +5,11 @@
 package universidadgrupo79.vistas;
 
 import javax.swing.table.DefaultTableModel;
+import universidadgrupo79.accesoADatos.AlumnoData;
+import universidadgrupo79.accesoADatos.InscripcionData;
 import universidadgrupo79.accesoADatos.MateriaData;
+import universidadgrupo79.entidades.Alumnos;
+import universidadgrupo79.entidades.Inscripcion;
 import universidadgrupo79.entidades.Materia;
 
 /**
@@ -14,11 +18,12 @@ import universidadgrupo79.entidades.Materia;
  */
 public class AlumnosPorMateria extends javax.swing.JInternalFrame {
 
-    private DefaultTableModel modelo=new DefaultTableModel(){
-         public boolean isCellEditable(int f, int c){
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        public boolean isCellEditable(int f, int c) {
             return false;
         }
     };
+
     /**
      * Creates new form AlumnosPorMateria
      */
@@ -26,6 +31,7 @@ public class AlumnosPorMateria extends javax.swing.JInternalFrame {
         initComponents();
         armarCabecera();
         cargarCombox();
+        cargarTabla();
     }
 
     /**
@@ -43,7 +49,7 @@ public class AlumnosPorMateria extends javax.swing.JInternalFrame {
         jcMateria = new javax.swing.JComboBox<>();
         jbSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtListadoAluMat = new javax.swing.JTable();
+        jtListado = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -60,10 +66,20 @@ public class AlumnosPorMateria extends javax.swing.JInternalFrame {
 
         jcMateria.setBackground(new java.awt.Color(255, 255, 255));
         jcMateria.setForeground(new java.awt.Color(0, 0, 0));
+        jcMateria.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcMateriaItemStateChanged(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
-        jtListadoAluMat.setModel(new javax.swing.table.DefaultTableModel(
+        jtListado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -74,7 +90,7 @@ public class AlumnosPorMateria extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jtListadoAluMat);
+        jScrollPane1.setViewportView(jtListado);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -131,6 +147,14 @@ public class AlumnosPorMateria extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jcMateriaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcMateriaItemStateChanged
+       cargarTabla();
+    }//GEN-LAST:event_jcMateriaItemStateChanged
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+         this.setVisible(false);
+    }//GEN-LAST:event_jbSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -139,25 +163,38 @@ public class AlumnosPorMateria extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Materia> jcMateria;
-    private javax.swing.JTable jtListadoAluMat;
+    private javax.swing.JTable jtListado;
     // End of variables declaration//GEN-END:variables
 
-    private void armarCabecera(){
+    private void armarCabecera() {
         modelo.addColumn("ID");
         modelo.addColumn("DNI");
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
-        jtListadoAluMat.setModel(modelo);
+        jtListado.setModel(modelo);
     }
-      
-    private void cargarCombox(){
-        MateriaData mate=new MateriaData();
+
+    private void cargarCombox() {
+        MateriaData mate = new MateriaData();
         for (Materia mat : mate.listarMaterias()) {
             jcMateria.addItem(mat);
         }
-            
-        
-    }
-    
-}
 
+    }
+
+    private void cargarTabla() {
+        InscripcionData inD = new InscripcionData();
+        Materia mat = (Materia) jcMateria.getSelectedItem();
+        AlumnoData ad=new AlumnoData();
+        modelo.setRowCount(0);
+        int f = 0;
+        for (Alumnos alu : inD.obtenerAlumnosPorMateria(mat.getIdMateria())) {
+            modelo.addRow(new Object[]{
+                alu.getIdAlumno(),
+                ad.buscarAlumno(alu.getIdAlumno()).getDni(),
+                alu.getApellido(),
+                alu.getNombre()
+            });
+        }
+    }
+}
