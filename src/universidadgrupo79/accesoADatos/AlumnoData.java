@@ -60,7 +60,7 @@ public class AlumnoData {
                 JOptionPane.showMessageDialog(null, "Alumno modificado");
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a tabla Alumno");
+            JOptionPane.showMessageDialog(null, "Error al modificar alumno\n"+e.getMessage());
         }
     }
 
