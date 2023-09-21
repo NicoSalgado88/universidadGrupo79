@@ -71,6 +71,11 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
         jLabel2.setText("Seleccione un Alumno");
 
         jbAlumnos.setBackground(new java.awt.Color(255, 255, 255));
+        jbAlumnos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jbAlumnosItemStateChanged(evt);
+            }
+        });
         jbAlumnos.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jbAlumnosPropertyChange(evt);
@@ -251,7 +256,7 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAlumnosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jbAlumnosPropertyChange
-
+        
     }//GEN-LAST:event_jbAlumnosPropertyChange
 
     private void jrInscriptoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jrInscriptoPropertyChange
@@ -267,21 +272,7 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrNoInscriptoStateChanged
 
     private void jrInscriptoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jrInscriptoItemStateChanged
-//             InscripcionData inD = new InscripcionData();
-//        Alumnos alu = (Alumnos) jbAlumnos.getSelectedItem();
-//        modelo.setRowCount(0);
-//        if(jrNoInscripto.isSelected()){
-//            jrNoInscripto.setSelected(false);
-//        }
-//        if (jrInscripto.isSelected()) {
-//            for (Materia mat : inD.obtenerMateriasCursadas(alu.getIdAlumno())) {
-//                modelo.addRow(new Object[]{
-//                    mat.getIdMateria(),
-//                    mat.getNombre(),
-//                    mat.getAño()
-//                });
-//            }
-//        }
+
     }//GEN-LAST:event_jrInscriptoItemStateChanged
 
     private void jrNoInscriptoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jrNoInscriptoItemStateChanged
@@ -349,6 +340,12 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
         Alumnos alu=(Alumnos)jbAlumnos.getSelectedItem();
         inscd.borrarInscripcion(alu.getIdAlumno(), (int)modelo.getValueAt(jtFormulario.getSelectedRow(), 0));
     }//GEN-LAST:event_jbAnularActionPerformed
+
+    private void jbAlumnosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jbAlumnosItemStateChanged
+        modelo.setRowCount(0);
+        jrNoInscripto.setSelected(false);
+        jrInscripto.setSelected(false);
+    }//GEN-LAST:event_jbAlumnosItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

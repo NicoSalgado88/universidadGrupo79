@@ -8,8 +8,6 @@ package universidadgrupo79.accesoADatos;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import universidadgrupo79.entidades.Alumnos;
 import universidadgrupo79.entidades.Inscripcion;

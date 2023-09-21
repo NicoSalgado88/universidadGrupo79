@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
 package universidadgrupo79.vistas;
 
 import javax.swing.JOptionPane;
@@ -14,11 +10,15 @@ import universidadgrupo79.entidades.Materia;
  */
 public class FormularioDeMateria extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form FormularioDeMateria
-     */
+    Materia matMod;
+    MateriaData md;
+
     public FormularioDeMateria() {
         initComponents();
+        jbModificar.setVisible(false);
+        jbGuardarMod.setVisible(false);
+        matMod = new Materia();
+        md = new MateriaData();
     }
 
     /**
@@ -45,6 +45,8 @@ public class FormularioDeMateria extends javax.swing.JInternalFrame {
         jbEliminar = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
+        jbModificar = new javax.swing.JButton();
+        jbGuardarMod = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -121,6 +123,20 @@ public class FormularioDeMateria extends javax.swing.JInternalFrame {
             }
         });
 
+        jbModificar.setText("Modificar");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
+
+        jbGuardarMod.setText("Guardar");
+        jbGuardarMod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarModActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -156,9 +172,13 @@ public class FormularioDeMateria extends javax.swing.JInternalFrame {
                                         .addGap(13, 13, 13))
                                     .addComponent(jtNombre)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jrEstado)
-                                            .addComponent(jtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jbModificar)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jrEstado)
+                                                .addComponent(jtAño, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jbGuardarMod)
                                         .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addContainerGap(86, Short.MAX_VALUE))
         );
@@ -185,7 +205,11 @@ public class FormularioDeMateria extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jrEstado)
                             .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbModificar)
+                            .addComponent(jbGuardarMod))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbNuevo)
                             .addComponent(jbEliminar)
@@ -215,8 +239,6 @@ public class FormularioDeMateria extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        MateriaData md = new MateriaData();
-
         try {
             int idMateria = Integer.parseInt(jtIdMateria.getText());
             if (!jtIdMateria.getText().isEmpty()) {
@@ -232,6 +254,7 @@ public class FormularioDeMateria extends javax.swing.JInternalFrame {
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "La materia no existe");
         }
+        jbModificar.setVisible(true);
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -243,8 +266,7 @@ public class FormularioDeMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-       MateriaData md = new MateriaData();
-       //REVISAR MATERIA DATA--elimina materias a pesar de haber inscriptos
+        //REVISAR MATERIA DATA--elimina materias a pesar de haber inscriptos
         try {
             int idMateria = Integer.parseInt(jtIdMateria.getText());
             if (!jtIdMateria.getText().isEmpty()) {
@@ -259,7 +281,6 @@ public class FormularioDeMateria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbEliminarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        MateriaData md = new MateriaData();
         Materia mat = new Materia();
         try {
             mat.setActivo(jrEstado.isSelected());
@@ -278,6 +299,40 @@ public class FormularioDeMateria extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+        jbGuardar.setEnabled(false);
+        jtNombre.setEditable(true);
+        jtAño.setEditable(true);
+        jrEstado.setEnabled(true);
+        jbGuardarMod.setVisible(true);
+        jbModificar.setVisible(false);
+        jtIdMateria.setEditable(false);
+        for (Materia mat : md.listarMaterias()) {
+            if (mat.getIdMateria() == Integer.parseInt(jtIdMateria.getText())) {
+                matMod = mat;
+                break;
+            }
+        }
+    }//GEN-LAST:event_jbModificarActionPerformed
+
+    private void jbGuardarModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarModActionPerformed
+        try {
+            if (!jtNombre.getText().isEmpty()) {
+                matMod.setNombre(jtNombre.getText());
+            }
+            if(!jtAño.getText().isEmpty()){
+                matMod.setAño(Integer.parseInt(jtAño.getText()));
+            }
+            matMod.setActivo(jrEstado.isSelected());
+            md.modificarMateria(matMod);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "El campo 'Año' solo admite números");
+        }
+        jbGuardarMod.setVisible(false);
+        jbGuardar.setEnabled(true);
+        limpiar();
+    }//GEN-LAST:event_jbGuardarModActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -289,6 +344,8 @@ public class FormularioDeMateria extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbGuardarMod;
+    private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
     private javax.swing.JRadioButton jrEstado;
@@ -297,7 +354,7 @@ public class FormularioDeMateria extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
 
-private void limpiar() {
+    private void limpiar() {
         jtIdMateria.setText("");
         jtNombre.setText("");
         jtNombre.setEditable(true);
@@ -305,5 +362,6 @@ private void limpiar() {
         jrEstado.setEnabled(true);
         jtAño.setText("");
         jtAño.setEditable(true);
+
     }
 }
