@@ -256,19 +256,19 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAlumnosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jbAlumnosPropertyChange
-        
+
     }//GEN-LAST:event_jbAlumnosPropertyChange
 
     private void jrInscriptoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jrInscriptoPropertyChange
-     
+
     }//GEN-LAST:event_jrInscriptoPropertyChange
 
     private void jrInscriptoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jrInscriptoStateChanged
-      
+
     }//GEN-LAST:event_jrInscriptoStateChanged
 
     private void jrNoInscriptoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jrNoInscriptoStateChanged
-        
+
     }//GEN-LAST:event_jrNoInscriptoStateChanged
 
     private void jrInscriptoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jrInscriptoItemStateChanged
@@ -276,7 +276,7 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrInscriptoItemStateChanged
 
     private void jrNoInscriptoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jrNoInscriptoItemStateChanged
-    
+
     }//GEN-LAST:event_jrNoInscriptoItemStateChanged
 
     private void jrInscriptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrInscriptoActionPerformed
@@ -284,7 +284,7 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
         InscripcionData inD = new InscripcionData();
         Alumnos alu = (Alumnos) jbAlumnos.getSelectedItem();
         modelo.setRowCount(0);
-        if(jrNoInscripto.isSelected()){
+        if (jrNoInscripto.isSelected()) {
             jrNoInscripto.setSelected(false);
         }
         if (jrInscripto.isSelected()) {
@@ -300,10 +300,10 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
 
     private void jrNoInscriptoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrNoInscriptoActionPerformed
         // TODO add your handling code here:
-          InscripcionData inD = new InscripcionData();
+        InscripcionData inD = new InscripcionData();
         Alumnos alu = (Alumnos) jbAlumnos.getSelectedItem();
         modelo.setRowCount(0);
-        if(jrInscripto.isSelected()){
+        if (jrInscripto.isSelected()) {
             jrInscripto.setSelected(false);
         }
         if (jrNoInscripto.isSelected()) {
@@ -324,21 +324,29 @@ public class ManejoDeInscripciones extends javax.swing.JInternalFrame {
 
     private void jbInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbInscribirActionPerformed
         // TODO add your handling code here:
-        InscripcionData incd=new InscripcionData();
-        Materia mate=new Materia();
-        mate.setIdMateria((int) modelo.getValueAt(jtFormulario.getSelectedRow(), 0));
-        int nota=Integer.parseInt(JOptionPane.showInputDialog(null, "ingrese nota"));
-        Inscripcion insc=new Inscripcion((Alumnos) jbAlumnos.getSelectedItem(), mate,nota );
+        InscripcionData incd = new InscripcionData();
+        Materia mate = new Materia();
+        if (jtFormulario.getSelectedRow() != -1) {
+            mate.setIdMateria((int) modelo.getValueAt(jtFormulario.getSelectedRow(), 0));
+            int nota = Integer.parseInt(JOptionPane.showInputDialog(null, "ingrese nota"));
+            Inscripcion insc = new Inscripcion((Alumnos) jbAlumnos.getSelectedItem(), mate, nota);
+            incd.guardarInscripcion(insc);
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una materia");
+        }
 
-        incd.guardarInscripcion(insc);
-        
+
     }//GEN-LAST:event_jbInscribirActionPerformed
 
     private void jbAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAnularActionPerformed
         // TODO add your handling code here:
-        InscripcionData inscd=new InscripcionData();
-        Alumnos alu=(Alumnos)jbAlumnos.getSelectedItem();
-        inscd.borrarInscripcion(alu.getIdAlumno(), (int)modelo.getValueAt(jtFormulario.getSelectedRow(), 0));
+        InscripcionData inscd = new InscripcionData();
+        Alumnos alu = (Alumnos) jbAlumnos.getSelectedItem();
+        if (jtFormulario.getSelectedRow() != -1) {
+        inscd.borrarInscripcion(alu.getIdAlumno(), (int) modelo.getValueAt(jtFormulario.getSelectedRow(), 0));
+        }else{
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una materia");
+        }
     }//GEN-LAST:event_jbAnularActionPerformed
 
     private void jbAlumnosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jbAlumnosItemStateChanged
